@@ -41,7 +41,7 @@ User's email idea
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/NisargKadam/Langchain_sample_project.git
+git clone https://github.com/anivedmishra/Langchain_sample_project.git
 cd Langchain_sample_project
 ```
 
@@ -150,3 +150,22 @@ Best,
 - [LangChain](https://python.langchain.com/) - Framework for building LLM applications
 - [OpenAI GPT-4o-mini](https://platform.openai.com/) - The LLM powering the agent
 - [python-dotenv](https://pypi.org/project/python-dotenv/) - Environment variable management
+
+
+## Story Writer Agent
+
+This repository now includes a second single-agent example: the Story Writer Agent.
+
+What it does:
+- Turns a one-line story prompt into a structured outline, then expands it into a 400–600 word short story.
+
+Run the Story Writer Agent interactively:
+
+```bash
+python story_writer_agent.py
+```
+
+Follow the prompts and provide a short theme or one-line story idea (e.g., "a robot who learns to feel emotions").
+
+The agent uses two tools under the hood: `create_story_outline` and `write_short_story`.
+
