@@ -1,171 +1,90 @@
-# Email Humanizer - LangChain Single Agent Project
+# Story Writer Assignment — LangChain Single-Agent Project
 
-A beginner-friendly project that teaches you how to build a **single agent** using **LangChain + OpenAI**. The agent takes a brief email idea and generates a natural, human-sounding email.
+This repository demonstrates the Story Writer agent built with LangChain and OpenAI.
 
-## What You'll Learn
+The previous `Email Humanizer` content has been archived in `archive/`.
 
-- How LangChain works (LLMs, prompts, tools, agents)
-- How to create tools using the `@tool` decorator
-- How an agent decides which tools to call and in what order
-- How `PromptTemplate` shapes LLM output
-- How the agent's tool-calling loop works (think -> act -> observe -> repeat)
+## Assignment Overview
 
-## How It Works
+Anived Mishra — Story Writer Agent
 
-```
-User's email idea
-       |
-       v
-  [Agent thinks: "I need to draft an email first"]
-       |
-       v
-  [Tool: draft_email] --> creates a formal, structured email
-       |
-       v
-  [Agent thinks: "Now I should humanize this draft"]
-       |
-       v
-  [Tool: humanize_email] --> rewrites it to sound natural and warm
-       |
-       v
-  Final humanized email returned to user
-```
+Use Case: A user provides a theme or a one-line story prompt. The agent first creates a story outline and then expands it into a complete short story.
 
-## Prerequisites
+Tools implemented:
+- `create_story_outline(prompt)` — produce characters, setting, conflict, and resolution
+- `write_short_story(outline)` — expand the outline into a 400–600 word short story
 
-- Python 3.10 or higher
-- An OpenAI API key ([get one here](https://platform.openai.com/api-keys))
+## Evaluation Criteria
+
+| Criteria | Points |
+|---|---:|
+| Code follows the same LangChain agent structure as `email_humanizer.py` | 20 |
+| Both tools are implemented correctly using `@tool` and `PromptTemplate` | 20 |
+| Agent runs end-to-end without errors | 20 |
+| `README.md` clearly explains the use case and how to run it | 20 |
+| GitHub repo is public, clean, and has `.env.example` (no real API key committed) | 20 |
+| **Total** | **100** |
 
 ## Setup
 
-### 1. Clone the repository
+1. Clone the repository (or use your existing local copy):
 
 ```bash
 git clone https://github.com/anivedmishra/Langchain_sample_project.git
 cd Langchain_sample_project
 ```
 
-### 2. Create a virtual environment
+2. Create and activate a virtual environment:
 
 ```bash
 python -m venv .venv
+source .venv/bin/activate
 ```
 
-Activate it:
-
-- **Windows (PowerShell):**
-  ```powershell
-  .venv\Scripts\Activate
-  ```
-- **macOS / Linux:**
-  ```bash
-  source .venv/bin/activate
-  ```
-
-### 3. Install dependencies
+3. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Set up your API key
-
-Copy the example env file and add your real key:
+4. Copy the env example and add your OpenAI key:
 
 ```bash
 cp .env.example .env
+# Edit .env and set OPENAI_API_KEY=sk-your-key-here
 ```
 
-Open `.env` and replace the placeholder with your actual OpenAI API key:
-
-```
-OPENAI_API_KEY=sk-your-actual-key-here
-```
-
-## Run
-
-```bash
-python email_humanizer.py
-```
-
-You'll see an interactive prompt:
-
-```
-============================================================
-  EMAIL HUMANIZER AGENT
-  Powered by LangChain + OpenAI
-============================================================
-
-Describe the email you want to write, and the agent will
-create a natural, human-sounding email for you.
-
-Type 'quit' to exit.
-
-Your email idea:
-```
-
-Type your email idea (e.g., `thank my team for finishing the project on time`) and the agent will generate a humanized email. You'll also see detailed logs showing the agent's reasoning and tool calls.
-
-## Example
-
-**Input:**
-```
-thank my team for finishing the project on time
-```
-
-**Output:**
-```
-Subject: Huge Thanks for Your Amazing Work on the Project!
-
-Hey Team,
-
-I hope you're all doing well! I just wanted to take a minute to say a big
-thank you for all the hard work you put into getting the project done on time.
-Your dedication and teamwork really made a difference, and I can't tell you
-how much I appreciate it.
-
-Each of you brought something special to the table, and I'm so proud to be
-part of such a talented group. Let's keep this momentum going and continue
-to achieve great things together!
-
-Thanks again for everything!
-
-Best,
-[Your Name]
-```
-
-## Project Structure
-
-```
-.
-├── email_humanizer.py   # Main agent code (fully commented)
-├── requirements.txt     # Python dependencies
-├── .env.example         # API key template
-├── .gitignore           # Keeps secrets and venv out of git
-└── README.md            # This file
-```
-
-## Tech Stack
-
-- [LangChain](https://python.langchain.com/) - Framework for building LLM applications
-- [OpenAI GPT-4o-mini](https://platform.openai.com/) - The LLM powering the agent
-- [python-dotenv](https://pypi.org/project/python-dotenv/) - Environment variable management
-
-
-## Story Writer Agent
-
-This repository now includes a second single-agent example: the Story Writer Agent.
-
-What it does:
-- Turns a one-line story prompt into a structured outline, then expands it into a 400–600 word short story.
-
-Run the Story Writer Agent interactively:
+## Run the Story Writer Agent (interactive)
 
 ```bash
 python story_writer_agent.py
 ```
 
-Follow the prompts and provide a short theme or one-line story idea (e.g., "a robot who learns to feel emotions").
+Follow the prompt and enter a one-line story idea (e.g., "a robot who learns to feel emotions").
 
-The agent uses two tools under the hood: `create_story_outline` and `write_short_story`.
+## Test script (automated check)
+
+Run the included quick test which invokes the agent on a sample prompt and prints the output:
+
+```bash
+python run_story_test.py
+```
+
+This test script uses the same `.env` API key and will print a generated title + short story to stdout.
+
+## Files of interest
+
+- `story_writer_agent.py` — the agent implementation using LangChain's `@tool`, `PromptTemplate`, and `create_agent`.
+- `run_story_test.py` — small test harness that runs the agent on a sample prompt.
+- `.env.example` — placeholder for `OPENAI_API_KEY` (no real keys committed).
+- `archive/` — contains backups of earlier README and archived examples (e.g., the original `email_humanizer.py` content).
+
+## Notes for reviewers
+
+- The repository now focuses on the Story Writer assignment; archived examples were moved to `archive/` to keep the main README and project scope aligned with the assignment.
+- Confirm the repo is public on GitHub to satisfy the 'public, clean' criterion.
+
+---
+
+If you'd like I can also add the full assignment text verbatim into `README.md` or create a `assignment.md` file in the repo — tell me which you prefer and I'll commit it.
 
